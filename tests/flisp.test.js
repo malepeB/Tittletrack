@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { calcFlisp, calcDeposit } from '../lib/flisp.js';
+test('FR03 valid income gives a subsidy', () => { const r = calcFlisp(9000, true); assert.ok(r.ok && r.subsidy > 27960 && r.subsidy < 130500); });
+test('FR03 band edges', () => { assert.equal(calcFlisp(3501, true).subsidy, 130500); assert.equal(Math.round(calcFlisp(22000, true).subsidy), 27960); });
+test('FR03 outside band is rejected', () => { assert.equal(calcFlisp(3500, true).ok, false); assert.equal(calcFlisp(22001, true).ok, false); });
+test('FR03 non first-time buyer rejected', () => assert.equal(calcFlisp(9000, false).ok, false));
+test('FR03 invalid input rejected', () => assert.equal(calcFlisp(NaN, true).ok, false));
+test('Deposit refund with interest and damages', () => { const r = calcDeposit(5000, 6, 12, 500); assert.equal(r.interest, 300); assert.equal(r.refund, 4800); });
+test('Deposit rejects bad input', () => assert.equal(calcDeposit(-1, 5, 3).ok, false));

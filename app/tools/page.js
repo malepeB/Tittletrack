@@ -1,0 +1,3 @@
+import Link from 'next/link';
+const T = [['AI letter helper', 'Draft a deposit, eviction or Deeds Office letter in seconds.', '/letter'], ['Deposit calculator', 'Work out the refund you are owed, with interest.', '/deposit'], ['Lease checker', 'Tick your lease clauses and see which may be unlawful.', '/lease'], ['Rental tribunal', 'Get a complaint summary and download it as a PDF.', '/tribunal'], ['My dashboard', 'Track applications and keep documents safe.', '/dashboard'], ['Feedback', 'Rate TitleTrack and tell us how to improve.', '/feedback']];
+export default function Tools() { return (<div className="wrap"><h2>Tools</h2><div className="grid">{T.map(t => <Link key={t[0]} href={t[2]} className="card"><h3>{t[0]}</h3><p>{t[1]}</p></Link>)}</div></div>); }
